@@ -1,0 +1,28 @@
+#jhc {
+    outline: none;
+    resize: none;
+    overflow: wrap;
+    width: 100%;
+    padding-left: 10px;
+    font-family: monospace;
+    color: #aaa;
+    background-color: #000;
+    font-size: 12px;
+    line-height: 14px;
+    position: relative;
+    height: 100%;
+    border: 0px solid #000;
+}
+
+#jhc_parent {
+    position: fixed;
+    padding-top: 14px;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #000;
+    display: none;
+}
