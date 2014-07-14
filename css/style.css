@@ -1372,10 +1372,13 @@
 			background-image: url('../images/macbookjhc.png');
 			background-repeat: no-repeat;
 			background-position: center top; 
-			height: 250px;
+			width: 30%;
+    		padding-bottom: 20%;
 			margin: 0 auto; 
-			margin-left: 20px; 
 			display: table;
+			position: relative;
+			overflow: hidden;
+			background-size: 100%;
 		}
 
 /*********************************************************************************/
