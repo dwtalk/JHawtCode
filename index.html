@@ -142,7 +142,7 @@
 					</header>
 					<div class="row">
 						<section class="12u">
-							<p>Even with modern IDE's and tools to hotswap code, sometimes there is a need to programatically debug and control your application. That's where JHawtCode comes in. In my early day's I can remember playing the game Quake; one of the options was to press the tilda key ("~") and get a drop down console of options where you could programatically alter the runtime properties of the game. While I mostly used this to enable cheat codes, the concept translates really well into web application development. Sometimes, I need to run some code to either print out a session variable on the page, or execute a method that I forgot to code before starting up my server. Heck, even if I started up the server with the wrong runtime property, I would much rather change the value than restart the server again. Forget to load a class... No Problem. JHawtCode takes the code you write and dynamically compiles it in the classpath of your application, the loads and executes it. Feedback from your code can additionally be returned to the console using a built in printstream. All of these features are geared to make application development easier and troubleshooting faster.</p>
+							<p>Even with modern IDE's and tools to hotswap code, there is always a need to programatically debug and control your application once it is up and running. That's where JHawtCode comes in. In my early days' I can remember playing the game Quake; one of the options was to press the tilda key "~" and get a drop down console of options where you could programatically alter the runtime properties of the game. While I mostly used this to enable cheat codes, the concept translates really well into web application development. Sometimes, I need to run some code to either print out a session variable on the page, or execute a method that I forgot to code before starting up my server. Heck, even if I started up the server with the wrong runtime property, I would much rather change the value than restart the server again. Forget to load a class... No Problem. JHawtCode takes the code you write and dynamically compiles it in the classpath of your application, then loads and executes it. Feedback from your code can additionally be returned to the console using a built in printstream. All of these features are geared to make application development easier and troubleshooting faster.</p>
 						</section>
 					</div>
 					<div class="row">
@@ -155,10 +155,10 @@
 					</div>
 					<div class="row">
 						<section class="6u alignleft">
-							<p>Installation is a breeze. Simply include the JHawtCode jar in your project. Next, add component scanning to pick up the new endpoints: eg for Spring Boot @ComponentScan({"com.ddubyat.develop.jhawtcode.*"}). Then setup a system property to get it all going: -Djhawtcode.enabled=ICERTIFYTHISISNOTPROD</p>
+							<p>Installation is a breeze. To begin, simply include the JHawtCode jar in your project. Next, add component scanning to pick up the new endpoints for package "com.ddubyat.develop.jhawtcode.*". Then, setup a system property to get it all going: -Djhawtcode.enabled=ICERTIFYTHISISNOTPROD </p>
 						</section>
 						<section class="6u alignleft">
-							<p>Commands for JHawtCode are based off of a simple vim like structure. When you enter the console, just begin typing code then on a newline type ":w" to write that code, compile, and execute it. Hiding the console and clearing the buffer is just as simple ":q". Full documentation in the readme below.</p>
+							<p>Commands for JHawtCode are based off of a simple vim like structure. When you enter the console, just begin typing code, then on a newline type ":w" to write that code, compile, and execute it. Hiding the console and clearing the buffer is just as simple, ":q". Full documentation in the readme below.</p>
 						</section>
 					</div>
 					<ul class="actions">
@@ -174,27 +174,27 @@
 					<header>
 						<a name="pricing"><h2>Get JHawtCode!</h2></a>
 						<span class="byline">Open Source and Free</span>
-						<p>JHawtCode was developed to help Developers. Any non-commercial use is free with source code provided on github. There is a small charge for commercial use that will be used to enhance the product</p>
+						<p>JHawtCode was created to help Developers. Any non-commercial use is free with open source code provided on github. There is a small charge for commercial use that will be used to enhance the product. Feel free to contact us with any additional features you would like to see</p>
 					</header>
 					<div class="row">
 						<section class="4u">
 							<span class="image full"><img src="images/pic01.jpg" alt="" /></span>
 							<div class="box">
-								<p>JHawtCode is free for personal and non commercial use under the Creative	Commons Attribution-NonCommercial 3.0 License. Simply download or fork from the source</p>
+								<p>JHawtCode is free for personal and non-commercial use under the Creative	Commons Attribution-NonCommercial 3.0 License. Simply download or fork from the source</p>
 								<a href="#download" class="button-alt fa fa-caret-right">Download</a>
 							</div>
 						</section>
 						<section class="4u">
 							<span class="image full"><img src="images/pic02.jpg" alt="" /></span>
 							<div class="box">
-								<p>Commerical us in a developpment environment for paid developers and revenue generators starts at just $9.99 per seat; email for details</p>
+								<p>Commerical use in a developpment environment for paid developers and revenue generators starts at just $9.99 per developer; email for licensing details</p>
 								<a href="#" class="button-alt fa fa-caret-right myemail">Email</a>
 							</div>
 						</section>
 						<section class="4u">
 							<span class="image full"><img src="images/pic03.jpg" alt="" /></span>
 							<div class="box">
-								<p>One of the primary uses of JHawtCode is the ability to run in a server environment. Pricing for a non-development environment begins at $99.99 per jvm</p>
+								<p>A primary use of JHawtCode is the ability to run in a server environment. Imagine quickly patching QA! Pricing for a non-development environment begins at $99.99 per jvm</p>
 								<a href="#" class="button-alt fa fa-caret-right myemail">Email</a>
 							</div>
 						</section>
