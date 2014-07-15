@@ -110,7 +110,11 @@ public class DynamicCodeController {
             InvocationHandler handler = new DynamicCodeInvocationHandler(newDynamicClass);
             DynamicRuntimeCode proxy = (DynamicRuntimeCode) Proxy.newProxyInstance(DynamicRuntimeCode.class.getClassLoader(), new Class[]{DynamicRuntimeCode.class}, handler);
             try {
-                return proxy.doCode(applicationContext, request, response);
+                String runtimeResponse = proxy.doCode(applicationContext, request, response);
+                if(runtimeResponse == null) {
+                    runtimeResponse = "null";
+                }
+                return runtimeResponse;
             } catch (Throwable t) {
                 return "Runtime Exception: " + t.getLocalizedMessage();
             }
@@ -121,12 +125,12 @@ public class DynamicCodeController {
 
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/dynaprop", method = {RequestMethod.POST})
-    public String setProp(@RequestParam(required = true, value = "key") String key, @RequestParam(required = true, value = "value") String value) {
+    public String setProp(@RequestParam(required = true, value = "propkey") String propkey, @RequestParam(required = true, value = "value") String value) {
         if(!propertyUtil.canHawtTheCode()) {
             return (new String(""));
         }
 
-        return propertyUtil.setProp(key, value);
+        return propertyUtil.setProp(propkey, value);
     }
 
     @ResponseBody
@@ -137,7 +141,6 @@ public class DynamicCodeController {
         }
 
         URLClassLoader ucl = (URLClassLoader) Thread.currentThread().getContextClassLoader();
-        //url = "file:/opt/postgresql-9.3-1101.jdbc41.jar";
         try {
             ClassLoaderUtil.addUrlToClassPath(new URL(url), ucl);
         } catch (Exception e) {

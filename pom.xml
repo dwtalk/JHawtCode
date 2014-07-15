@@ -6,7 +6,7 @@
 
     <groupId>com.ddubyat.develop</groupId>
     <artifactId>jhawtcode</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>JHawtCode</name>
     <url>http://www.jhawtcode.com</url>
 
@@ -27,6 +27,7 @@
                     <include>js/*</include>
                     <include>LICENSE</include>
                     <include>3RD-PARTY-LICENSES</include>
+                    <include>jhawtcode-applicationContext.xml</include>
                 </includes>
             </resource>
             <resource>
@@ -75,6 +76,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

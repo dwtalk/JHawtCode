@@ -12,7 +12,7 @@ public class PropertyUtil {
     private ApplicationContext applicationContext;
 
     public String setProp(String propertyKey, String propertyValue) {
-        return System.setProperty(propertyKey, propertyValue);
+        return System.setProperty(propertyKey.trim(), propertyValue.trim());
     }
 
     public Boolean canHawtTheCode() {

@@ -38,16 +38,11 @@ jQuery(document).ready(function($) {
     var parent = $('#jhc_parent');
     var focus = false;
     var propmatch = /^(:sp)\s([a-zA-Z0-9\._]+)\s([a-zA-Z0-9\._]+)$/;
+    var jarmatch = /^(:rr)\s([a-zA-Z0-9-:\/\._]+)$/;
     var importmatch = /^(import\s[a-zA-Z0-9_\.]+)/;
     var globalMethodLineOrVarMatch = /^(public|private|protected|package)\s(.+;)/;
     var functionBeginMatch = /^(public|private|protected|package)\s(.+[(].*[)].*[^;])/;
     var clearOnInput = true;
-
-    var fileSelector = $('');
-
-    $("#jhcUpload").on("click",function(e) {
-        $('#jhcFile').upload("/jhawtcode/createJar", function(res) {console.log("done",res);}, function(progress) {console.log("progress",progress);});
-    });
 
     $(function() {
         $(window).keypress(function(e) {
@@ -169,14 +164,47 @@ jQuery(document).ready(function($) {
                 $(self).val('');
                 e.preventDefault();
                 parent.slideToggle();
-            } else if (lastCMD == ":rr") {
-                e.preventDefault();
-                //fileSelector.click();
-                $("#jhcUpload").click();
+            } else if (jarmatch.test(lastCMD)) {
+                $(self).val('');
+                var cmdMatch = jarmatch.exec(lastCMD);
+
+                $.ajax({
+                    url: "/jhawtcode/dynajar",
+                    type: "POST",
+                    data: {"url" : ""+cmdMatch[2]+""},
+                    cache: false,
+                    dataType: "text",
+                    success: function(data, textStatus, jqXHR) {
+                        $(self).insertAtCaret("Loaded: "+cmdMatch[2]);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $(self).insertAtCaret("JHawtCode: Unknown Error, check console for more information\n");
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                        console.log(errorThrown);
+                    }
+                })
+                clearOnInput = true;
             } else if (propmatch.test(lastCMD)) {
                 $(self).val('');
                 var cmdMatch = propmatch.exec(lastCMD);
-                $(self).insertAtCaret("Updated: "+cmdMatch[2]+"="+cmdMatch[3]);
+
+                $.ajax({
+                    url: "/jhawtcode/dynaprop",
+                    type: "POST",
+                    data: {"propkey" : ""+cmdMatch[2]+"", "value" : ""+cmdMatch[3]+""},
+                    cache: false,
+                    dataType: "text",
+                    success: function(data, textStatus, jqXHR) {
+                        $(self).insertAtCaret("Updated: "+cmdMatch[2]+"="+cmdMatch[3]);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $(self).insertAtCaret("JHawtCode: Unknown Error, check console for more information\n");
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                        console.log(errorThrown);
+                    }
+                })
             }
         }
     });
