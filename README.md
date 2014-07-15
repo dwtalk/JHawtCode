@@ -12,7 +12,7 @@ By using the JHawtCode product, you confirm that you have read and agreed to the
 
 http://demo.jhawtcode.com
 
-(https://raw.githubusercontent.com/dwtalk/JHawtCode/gh-pages/browsershot.png "JHawtCode - Demo")
+![alt text](https://raw.githubusercontent.com/dwtalk/JHawtCode/gh-pages/browsershot.png "JHawtCode - Demo")
 
 #### INSTALL
 
