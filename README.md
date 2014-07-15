@@ -1,7 +1,7 @@
 ![alt text](https://raw.githubusercontent.com/dwtalk/JHawtCode/gh-pages/apple-touch-icon-152x152.png "JHawtCode - Enable Spring God Mode")
 
 ## JHawtCode
-=====
+===
 
 A simple Quake like console for your Spring based site. Write and execute server side Java from your browser.
 
