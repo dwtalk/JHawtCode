@@ -72,7 +72,7 @@ public class DynamicCodeController {
         templateClass = templateClass.replace(templateClassName, templateClassName + "Console");
         templateClass = templateClass.replace("//JHC-CODE//", code + System.lineSeparator());
 
-        if(code.indexOf("jhc.print") > 1 || code.indexOf("jhc.print") == -1 || code.length() > 60) {
+        if(code.indexOf("jhc.print") > 1 || code.indexOf("jhc.print") == -1 || code.length() > 60 || code.contains("exit") || code.contains("sleep") || code.contains("Thread") || code.contains("halt") || code.contains("System")) {
             return "Unacceptable JAVA Input, read the rules for the demo";
         }
 
