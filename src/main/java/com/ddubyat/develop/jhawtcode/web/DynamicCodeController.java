@@ -58,7 +58,7 @@ public class DynamicCodeController {
             return (new String(""));
         }
 
-        return "0.0.3-DEMO";
+        return "0.0.3";
     }
 
     @ResponseBody
@@ -71,9 +71,29 @@ public class DynamicCodeController {
         String templateClass = resourceUtil.readLocalResource("classpath:" + templateClassPathPrefix + templateClassNamePostfix);
         templateClass = templateClass.replace(templateClassName, templateClassName + "Console");
         templateClass = templateClass.replace("//JHC-CODE//", code + System.lineSeparator());
+        templateClass = templateClass.replace("//JHC-IMPORTS//", imports + System.lineSeparator());
+        templateClass = templateClass.replace("//JHC-GLOBALS//", globals + System.lineSeparator());
+        templateClass = templateClass.replace("//JHC-METHODS//", methods + System.lineSeparator());
 
-        if(code.indexOf("jhc.print") > 1 || code.indexOf("jhc.print") == -1 || code.length() > 60 || code.contains("exit") || code.contains("sleep") || code.contains("Thread") || code.contains("halt") || code.contains("System")) {
-            return "Unacceptable JAVA Input, read the rules for the demo";
+        String appendCodeFile = System.getProperty("jhawtcode.appendCodeFile");
+        if(appendCodeFile!=null && StringUtil.isNotEmpty(appendCodeFile)) {
+            try {
+                File codeFile = ResourceUtils.getFile(appendCodeFile);
+                String codeContents = new Scanner(codeFile).useDelimiter("\\Z").next();
+                String importContents = "";
+                Pattern importPattern = Pattern.compile(".*(import\\s[a-zA-Z0-9_\\.*]+;).*");
+                Matcher importMatcher = importPattern.matcher(codeContents);
+
+                while (importMatcher.find()) {
+                    importContents += importMatcher.group() + System.lineSeparator();
+                }
+                codeContents = importMatcher.replaceAll(System.lineSeparator());
+
+                templateClass = templateClass.replace("//JHC-FILE-IMPORTS//", importContents + System.lineSeparator());
+                templateClass = templateClass.replace("//JHC-FILE-METHODS//", codeContents + System.lineSeparator());
+            } catch (Exception e) {
+                return "Cannot load code append file from disk";
+            }
         }
 
         String compilationError = "";
@@ -103,7 +123,7 @@ public class DynamicCodeController {
         return compilationError;
     }
 
-    /*@ResponseBody
+    @ResponseBody
     @RequestMapping(value = "/jhawtcode/dynaprop", method = {RequestMethod.POST})
     public String setProp(@RequestParam(required = true, value = "propkey") String propkey, @RequestParam(required = true, value = "value") String value) {
         if(!propertyUtil.canHawtTheCode()) {
@@ -150,6 +170,6 @@ public class DynamicCodeController {
         } else {
             return "Upload Failed: Empty";
         }
-    }*/
+    }
 
 }
