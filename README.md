@@ -67,16 +67,12 @@ Add a system property to ensure that JHawtCode is only run in a development envi
 
 ```
 -Djhawtcode.enabled=ICERTIFYTHISISNOTPROD
-
 ```
 
 #### PREREQUISITES
 
 - Java >= 1.6
-
-- Spring >= 3.0
-- Spring Boot >= 1.0.1
-
+- Spring >= 3.0 OR Spring Boot >= 1.0.1
 - A J2EE Container:  Tomcat or Jetty
 
 #### ARGUMENTS
