@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
-		<title> </title>
+		<title>JHawtCode</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
+		<meta name="description" content="Unlock Spring God Mode using JHawtCode, a Quake like console for your spring based site" />
+		<meta name="keywords" content="spring console, java clientside, java terminal, java console, java quake console, springsource console, spring loader, spring boot console" />
+		<meta charset="utf-8"> 
+		<link rel="author" href="https://plus.google.com/111801809924081249019"/>
 		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
@@ -44,7 +46,7 @@
 		  ga('send', 'pageview');
 		</script>
 	</head>
-	<body class="homepage">
+	<body class="homepage" itemscope itemtype="http://schema.org/AboutPage">
 
 		<!-- Header -->
 			<div id="header">
@@ -53,7 +55,7 @@
 					<!-- Logo -->
 						<div id="logo">
 							<div class="pennant"><div class=""></div></div>
-							<h1><a href="http://jhawtcode.com/">J<span>HawtCode</span></a></h1>
+							<h1><a href="http://jhawtcode.com/" itemprop="breadcrumb">J<span>HawtCode</span></a></h1>
 						</div>
 					<!-- /Logo -->
 					
@@ -85,10 +87,10 @@
 					<section>
 						<header>
 							<div class="row">
-								<div class="12u"><div class="macbook"></div></div>
+								<div class="12u"><div class="macbook"><h1 itemprop="name" class="pname">JHawtCode</h1></div></div>
 							</div>
-							<h2>spring god mode</h2>
-							<span class="byline">A simple Quake like console for your Spring based site. Write and execute server side Java from your browser.</span>
+							<h2 itemprop="headline">spring god mode</h2>
+							<span class="byline" itemprop="description">A simple Quake like console for your Spring based site. Write and execute server side Java from your browser.</span>
 						</header>
 						<a href="#download" class="button big style1">Download</a>
 					</section>
@@ -141,14 +143,14 @@
 						<span class="byline">Integrates seamlessly into your spring or spring boot web application</span>
 					</header>
 					<div class="row">
-						<section class="12u">
+						<section class="12u" itemprop="text">
 							<p>Even with modern IDE's and tools to hotswap code, there is always a need to programatically debug and control your application once it is up and running. That's where JHawtCode comes in. In my early days' I can remember playing the game Quake; one of the options was to press the tilda key "~" and get a drop down console of options where you could programatically alter the runtime properties of the game. While I mostly used this to enable cheat codes, the concept translates really well into web application development. Sometimes, I need to run some code to either print out a session variable on the page, or execute a method that I forgot to code before starting up my server. Heck, even if I started up the server with the wrong runtime property, I would much rather change the value than restart the server again. Forget to load a class... No Problem. JHawtCode takes the code you write and dynamically compiles it in the classpath of your application, then loads and executes it. Feedback from your code can additionally be returned to the console using a built in printstream. All of these features are geared to make application development easier and troubleshooting faster.</p>
 						</section>
 					</div>
 					<div class="row">
 						<section class="2u"></section>
 						<section class="8u">
-							<div class="video-container">
+							<div class="video-container" itemprop="video">
 								<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/TsXT-q4_K_Y" allowfullscreen frameborder="0"></iframe>
 							</div>
 						</section>
@@ -242,8 +244,8 @@
 					<!-- Social -->
 
 					<!-- Copyright -->
-						<div class="copyright">
-							&copy; 2014 Dustin Talk. All rights reserved. See License for terms and conditions.
+						<div class="copyright" itemprop="license">
+							&copy; <span itemprop="copyrightYear">2014</span> <span itemprop="copywrightHolder creator editor author">Dustin Talk</span>. All rights reserved. See License for terms and conditions.
 						</div>
 					<!-- /Copyright -->
 
