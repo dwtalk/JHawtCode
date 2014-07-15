@@ -6,9 +6,7 @@ A simple Quake like console for your Spring based site. Write and execute server
 
 #### LICENSE
 
-By using the JHawtCode product, you confirm that you have read and agreed to the license agreement, LICENSE, available at: https://github.com/dwtalk/JHawtCode/blob/master/LICENSE
-Non-commerical usage will be bound by the Creative Commons Attribution-NonCommercial 3.0 License.
-Commercial usage is permitted, under terms, as defined in the license through the purchase of a commercial license.
+By using the JHawtCode product, you confirm that you have read and agreed to the license agreement, LICENSE, available at: https://github.com/dwtalk/JHawtCode/blob/master/LICENSE . Non-commerical usage will be bound by the Creative Commons Attribution-NonCommercial 3.0 License. Commercial usage is permitted, under terms, as defined in the license through the purchase of a commercial license.
 
 #### DEMO
 
