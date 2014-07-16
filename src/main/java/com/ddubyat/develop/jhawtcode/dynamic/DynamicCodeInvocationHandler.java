@@ -11,7 +11,7 @@ import java.util.Arrays;
  * DynamicCodeInvocationHandler is the invocation handler that will manage proxying executable class
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 public class DynamicCodeInvocationHandler implements InvocationHandler {

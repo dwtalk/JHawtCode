@@ -18,7 +18,7 @@ import java.io.PrintWriter;
  * DynamicCodeFrom is a template class for dynamic invocation
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 public class DynamicCodeFrom implements com.ddubyat.develop.jhawtcode.dynamic.DynamicRuntimeCode {

@@ -25,7 +25,7 @@ import java.net.NetworkInterface;
  * InternalResourceController is a Spring Controller that will serve up css and js for JHawtCode
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 @Controller

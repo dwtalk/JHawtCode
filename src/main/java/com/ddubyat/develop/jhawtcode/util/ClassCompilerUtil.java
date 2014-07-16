@@ -18,7 +18,7 @@ import java.util.Locale;
  * ClassCompilerUtil compiles a file from string contents then load it into the current classloader using the extended classpath available to the container
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 @Service
@@ -63,7 +63,14 @@ public class ClassCompilerUtil {
 
         log.debug("Compilation Beginning");
         JavaCompiler.CompilationTask ct = compiler.getTask(null, javaFileManager, diagnostics, optionList, null, sourceJavaFiles);
-        ct.call();
+
+        try {
+            ct.call();
+        } catch (Throwable t) {
+            log.debug("Could not compile", t);
+            return null;
+        }
+
         javaFileManager.close();
         fileManager.close();
         log.debug("Compilation Completed");

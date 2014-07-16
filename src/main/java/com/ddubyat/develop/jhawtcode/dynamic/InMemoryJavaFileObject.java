@@ -11,7 +11,7 @@ import java.net.URI;
  * JavaClassObject contains its own code in a string versus a file
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 public class InMemoryJavaFileObject extends SimpleJavaFileObject implements JavaFileObject {

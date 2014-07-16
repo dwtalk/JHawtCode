@@ -1,5 +1,6 @@
 package com.ddubyat.develop.jhawtcode.dynamic;
 
+import jodd.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ import java.util.jar.JarEntry;
  * PackageDeconstructor retrieves classes from classloader
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 class PackageDeconstructor {
@@ -46,11 +47,14 @@ class PackageDeconstructor {
     public List<JavaFileObject> find(String packageName) throws IOException {
         String javaPackageName = packageName.replaceAll("\\.", "/");
         List<JavaFileObject> result = new ArrayList<>();
-        Enumeration<URL> urlEnumeration = classLoader.getResources(javaPackageName);
-        log.trace("Getting resources for: {}", javaPackageName);
-        while (urlEnumeration.hasMoreElements()) {
-            URL packageFolderURL = urlEnumeration.nextElement();
-            result.addAll(classList(packageName, packageFolderURL));
+
+        if(classLoader != null) {
+            Enumeration<URL> urlEnumeration = classLoader.getResources(javaPackageName);
+            log.trace("Getting resources for: {}", javaPackageName);
+            while (urlEnumeration.hasMoreElements()) {
+                URL packageFolderURL = urlEnumeration.nextElement();
+                result.addAll(classList(packageName, packageFolderURL));
+            }
         }
         return result;
     }

@@ -20,7 +20,7 @@ import java.util.zip.GZIPOutputStream;
  * ResourceUtil is used to read and manipulate local resources
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 @Service
@@ -71,7 +71,7 @@ public class ResourceUtil {
      * @return byte array of compressed string data
      * @throws IOException
      */
-    public static byte[] gzipCompress(String uncompressedData) throws IOException {
+    public byte[] gzipCompress(String uncompressedData) throws IOException {
         log.trace("GZip Compressing Resource");
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         GZIPOutputStream gzip = new GZIPOutputStream(byteStream);

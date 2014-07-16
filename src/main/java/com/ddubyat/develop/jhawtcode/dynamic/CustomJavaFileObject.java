@@ -10,7 +10,7 @@ import java.net.URI;
  * CustomJavaFileObject is an implementation of a JavaFileObject used for storing classloader classes
  *
  * @author dwtalk
- * @version 1.0
+ * @version 1.0.0
  * @since 2014-07-15
  */
 class CustomJavaFileObject implements JavaFileObject {
