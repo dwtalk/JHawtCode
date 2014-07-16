@@ -3,6 +3,8 @@ package com.ddubyat.develop.jhawtcode.web;
 import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
 import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
 import jodd.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,21 @@ import java.util.UUID;
 import java.security.*;
 import java.net.NetworkInterface;
 
+/**
+ * InternalResourceController is a Spring Controller that will serve up css and js for JHawtCode
+ *
+ * @author dwtalk
+ * @version 1.0
+ * @since 2014-07-15
+ */
 @Controller
 public class InternalResourceController {
 
-    String systemUUID = "";
+    private static Logger log = LoggerFactory.getLogger(InternalResourceController.class);
+    private static String systemUUID = "";
+    private static String appname = "";
+    private static String username = "";
+    private static String license = "";
 
     @Autowired
     private ResourceUtil resourceUtil;
@@ -30,9 +43,18 @@ public class InternalResourceController {
     @Autowired
     private PropertyUtil propertyUtil;
 
+    /**
+     * Controller method to deliver application CSS
+     *
+     * @param response The http response object from a spring controller
+     * @return GZip byte array of CSS code
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/jhc.css", method = {RequestMethod.GET})
     public byte[] requestCSS(HttpServletResponse response) throws IOException {
+        log.debug("Creating application CSS");
+
         response.setHeader("Content-Encoding", "gzip");
         response.setHeader("Server", "jhawtconsole");
         response.setContentType("text/css");
@@ -41,6 +63,7 @@ public class InternalResourceController {
         response.setDateHeader("Expires", -1);
 
         if(!propertyUtil.canHawtTheCode()) {
+            log.trace("Not delivering CSS, application not enabled");
             return (new String("")).getBytes();
         }
 
@@ -49,18 +72,31 @@ public class InternalResourceController {
         String sysHeightProp = System.getProperty("jhawtcode.console.height");
         if(sysHeightProp != null && StringUtil.isNotEmpty(sysHeightProp) && isNumeric(sysHeightProp)) {
             heightOverride = heightOriginal.replaceAll("200", sysHeightProp);
+            log.debug("Overriding console height to {}", heightOverride);
         }
 
         try {
+            log.debug("Attempting to return CSS");
             return resourceUtil.gzipCompress(resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride));
         } catch (IOException ioe) {
+            log.debug("Unable to create CSS", ioe);
             return ioe.getLocalizedMessage().getBytes("UTF-8");
         }
     }
 
+    /**
+     * Controller method to deliver application JS
+     *
+     * @param response The http response object from a spring controller
+     * @param request The http request object from a spring controller
+     * @return GZip byte array of JS code
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/jhc.js", method = {RequestMethod.GET})
     public byte[] requestJS(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.debug("Creating application JS");
+
         response.setHeader("Content-Encoding", "gzip");
         response.setHeader("Server", "jhawtconsole");
         response.setContentType("application/javascript");
@@ -69,9 +105,30 @@ public class InternalResourceController {
         response.setDateHeader("Expires", -1);
 
         if(!propertyUtil.canHawtTheCode()) {
+            log.trace("Not delivering CSS, application not enabled");
             return (new String("")).getBytes();
         }
 
+        setTraceProps(request);
+
+        String javascript = resourceUtil.readLocalResource(new String[]{"classpath:/js/jhawtcode.js"});
+        javascript = javascript.replace("|systemUUID|", systemUUID);
+        javascript = javascript.replace("|username|", username);
+        javascript = javascript.replace("|license|", license);
+        javascript = javascript.replace("|appname|", appname);
+
+        try {
+            log.debug("Attempting to return JS");
+            return resourceUtil.gzipCompress(javascript);
+        } catch (IOException ioe) {
+            log.debug("Unable to create JS", ioe);
+            return ioe.getLocalizedMessage().getBytes("UTF-8");
+        }
+
+    }
+
+    private static void setTraceProps(HttpServletRequest request) {
+        log.trace("Generating system properties");
         if(systemUUID.equalsIgnoreCase("")) {
             try {
                 //generate from hardware
@@ -90,38 +147,44 @@ public class InternalResourceController {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 byte[] thedigest = md.digest(bytesOfMessage);
                 systemUUID = new BigInteger(1, thedigest).toString(16);
+                log.trace("UUID Generated {}", systemUUID);
             } catch (Exception e) {
                 systemUUID = "1234567890";
+                log.trace("UUID Defaulted {}", systemUUID);
             }
         }
 
-        String appname = "noappname";
-        if(request.getSession() != null && request.getSession().getServletContext() != null && request.getSession().getServletContext().getServletContextName() != null) {
-            appname = request.getServletContext().getServletContextName();
+        log.trace("Generating app name");
+        if(appname.equalsIgnoreCase("")) {
+            if (request.getSession() != null && request.getSession().getServletContext() != null && request.getSession().getServletContext().getServletContextName() != null) {
+                appname = request.getServletContext().getServletContextName();
+                log.trace("Application Name Set to {}", appname);
+            } else {
+                appname = "noappname";
+            }
+            log.trace("Appname {}", appname);
         }
 
-        String username = "nouser";
-        if(System.getProperty("user.name") != null && StringUtil.isNotEmpty(System.getProperty("user.name"))) {
-            username = System.getProperty("user.name");
+        log.trace("Generating username");
+        if(username.equalsIgnoreCase("")) {
+            if (System.getProperty("user.name") != null && StringUtil.isNotEmpty(System.getProperty("user.name"))) {
+                username = System.getProperty("user.name");
+                log.trace("Username Set to {}", username);
+            } else {
+                username = "nouser";
+            }
+            log.trace("Username {}", username);
         }
 
-        String license = "demo";
-        if(System.getProperty("jhawtcode.license") != null && StringUtil.isNotEmpty(System.getProperty("jhawtcode.license"))) {
-            license = System.getProperty("jhawtcode.license");
+        log.trace("Generating license info");
+        if(license.equalsIgnoreCase("")) {
+            if (System.getProperty("jhawtcode.license") != null && StringUtil.isNotEmpty(System.getProperty("jhawtcode.license"))) {
+                license = System.getProperty("jhawtcode.license");
+            } else {
+                license = "demo";
+            }
+            log.trace("License {}", license);
         }
-
-        String javascript = resourceUtil.readLocalResource(new String[]{"classpath:/js/jhawtcode.js"});
-        javascript = javascript.replace("|systemUUID|", systemUUID);
-        javascript = javascript.replace("|username|", username);
-        javascript = javascript.replace("|license|", license);
-        javascript = javascript.replace("|appname|", appname);
-
-        try {
-            return resourceUtil.gzipCompress(javascript);
-        } catch (IOException ioe) {
-            return ioe.getLocalizedMessage().getBytes("UTF-8");
-        }
-
     }
 
     private static boolean isNumeric(String str) {

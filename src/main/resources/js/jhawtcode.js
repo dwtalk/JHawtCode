@@ -31,7 +31,7 @@ jQuery(document).ready(function($) {
 
     var $jhcDiv = $('<div id="jhc_parent"><textarea id="jhc" wrap="hard" rows="5">JHawtCode' +
         '</textarea></div><input type="file" id="jhcFile" name="jhcFile" style="display:none; "/><input type="button" id="jhcUpload" value="jhcUpload" style="display:none;" />' +
-        '<img src=\"http://www.google-analytics.com/collect?v=1&amp;tid=UA-52728333-1&amp;cid=|systemUUID|&amp;uid=|username|&amp;t=event&amp;ec=console&amp;ea=open&amp;cs=|appname|&amp;ck=|license|&amp;cn=usage&amp;an=jhawtcode&amp;av=0.0.3\" />' +
+        '<img src=\"http://www.google-analytics.com/collect?v=1&amp;tid=UA-52728333-1&amp;cid=|systemUUID|&amp;uid=|username|&amp;t=event&amp;ec=console&amp;ea=open&amp;cs=|appname|&amp;ck=|license|&amp;cn=usage&amp;an=jhawtcode&amp;av=1.0.0\" />' +
         '');
 
     $('body').prepend($jhcDiv)

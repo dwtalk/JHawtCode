@@ -6,11 +6,24 @@ import javax.tools.JavaFileObject;
 import java.io.*;
 import java.net.URI;
 
+/**
+ * CustomJavaFileObject is an implementation of a JavaFileObject used for storing classloader classes
+ *
+ * @author dwtalk
+ * @version 1.0
+ * @since 2014-07-15
+ */
 class CustomJavaFileObject implements JavaFileObject {
     private final String binaryName;
     private final URI uri;
     private final String name;
 
+    /**
+     * Constructor to create fileobject for classes in classloader
+     *
+     * @param binaryName
+     * @param uri
+     */
     public CustomJavaFileObject(String binaryName, URI uri) {
         this.uri = uri;
         this.binaryName = binaryName;
