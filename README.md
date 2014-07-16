@@ -22,7 +22,7 @@ Setup your dependency to include the jhawtcode jar. Example maven configuration 
 Maven Configuration
 ```
 <dependency>
-	<groupId>com.ddubyat.develop</groupId>
+	<groupId>com.ddubyat</groupId>
 	<artifactId>jhawtcode</artifactId>
 	<version>1.0.0</version>
 </dependency>
