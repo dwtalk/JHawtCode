@@ -77,13 +77,9 @@ Add a system property to ensure that JHawtCode is only run in a development envi
 
 #### USAGE
 
-JHawtCode operates of a vim-like command stricture.
+##### Coding
 
-When opening the console, you are immediatly in development mode. From here your are able to begin writing code or executing commands.
-
-Entering code is much like writing the inners of a java class. The exception here is that there is no class definition. You are able to write methods, declare globals, import packages, and wite code all from here.
-
-To complete the code, submit it for compliation and execution, and see the results, the command ```:w``` must be entered to finalize the java chunk.
+JHawtCode operates of a vim-like command structure. When opening the console, you are immediately in development mode. From here your are able to begin writing code or executing commands. Entering code is much like writing the inners of a java class. The exception here is that there is no class definition. You are able to write methods, declare globals, import packages, and wite code all from here. To complete the code, submit it for compliation and execution, and see the results, the command ```:w``` must be entered to finalize the java chunk.
 
 An example of some acceptable input would be:
 ```
@@ -120,10 +116,15 @@ HttpSession getSession();
 Cookie getCookie(String cookieName);
 ```
 
+##### Options
+
 JHawtCode is not limited to these helper objects, and your own code can be used to supplement this. To enable this, simply create a local file with imports, global variables, and methods. Then you will need to specify the location to this file with a system property such as: ```-Djhawtcode.appendCodeFile=/opt/myCode.txt```. The only other additional system property that JHawtCode uses, is a variable to control the system height: ```-Djhawtcode.console.height=500```.
 
+##### System Properties
 
 With JHawtCode System Properties can be updated dynamically as well. If you want to change, for example, the height of the console, you could simply issue the set property command. The command would be issued on a single line as: ```:sp jhawtcode.console.height 50```.
+
+##### Loading Classes
 
 One additional feature of JHawtCode is the ability to load a jar at runtime into the classpath of the running JVM. We've all probably received the dreaded ClassDefNotFoundError for some random jar, and this aims to be able to fix that while the app is running. The jar must be local, and would be loaded with the command example: ```:rr file:/opt/fixmissing.jar```
 
