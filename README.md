@@ -24,7 +24,7 @@ Maven Configuration
 <dependency>
 	<groupId>com.ddubyat.develop</groupId>
 	<artifactId>jhawtcode</artifactId>
-	<version>0.0.3</version>
+	<version>1.0.0</version>
 </dependency>
 ```
 
