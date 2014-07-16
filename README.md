@@ -162,4 +162,4 @@ https://github.com/dwtalk/JHawtCode/issues
 
 #### DEVELOPER DOCUMENTATION
 
-TBD
+http://jhawtcode.com/javadoc/
