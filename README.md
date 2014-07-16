@@ -131,19 +131,19 @@ One additional feature of JHawtCode is the ability to load a jar at runtime into
 
 #### EXAMPLES
 Below are three simple example of usage. They do not indicate the complexity possible but offer some example of simple invocation.
+######Print the Google Analytics Tracking ID from cookie
 
 ```
-//Print the Google Analytics Tracking ID from cookie
 jhc.println(getCookie("_ga").getValue());
 :w
 ```
+######Do some simple Math
 ```
-//Do some simple math
 jhc.println(java.lang.Math.pow(3,3));
 :w
 ```
+######Display an int in hex
 ```
-//Convert and int to hex
 jhc.println(Integer.toHexString(1234));
 :w
 ```
