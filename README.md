@@ -75,7 +75,57 @@ Add a system property to ensure that JHawtCode is only run in a development envi
 - Spring >= 3.0 OR Spring Boot >= 1.0.1
 - A J2EE Container:  Tomcat or Jetty
 
-#### ARGUMENTS
+#### USAGE
+
+JHawtCode operates of a vim-like command stricture.
+
+When opening the console, you are immediatly in development mode. From here your are able to begin writing code or executing commands.
+
+Entering code is much like writing the inners of a java class. The exception here is that there is no class definition. You are able to write methods, declare globals, import packages, and wite code all from here.
+
+To complete the code, submit it for compliation and execution, and see the results, the command ```:w``` must be entered to finalize the java chunk.
+
+An example of some acceptable input would be:
+```
+import java.lang.Math;
+
+private int squared;
+
+jhc.println(getSquare(2));
+
+private int getSquare(int src) {
+	if(scr > 1) {
+		return Math.pow(src,2);
+	} else {
+		return 0;
+	}
+}
+:w
+```
+
+The above code will return 4 to the console, and clear the code from the window. The variable jhc is configured as a print stream and can be used similar to System.out to return data to the console.
+
+```
+jhc.println("");
+```
+
+Additionally, a few helper methods and global variables are build into the code that allow for quicker operations in Spring. These are:
+```
+WebApplicationContext webApplicationContext;
+ApplicationContext applicationContext;
+HttpServletRequest request;
+HttpServletResponse response;
+Object getBean(String beanName);
+HttpSession getSession();
+Cookie getCookie(String cookieName);
+```
+
+JHawtCode is not limited to these helper objects, and your own code can be used to supplement this. To enable this, simply create a local file with imports, global variables, and methods. Then you will need to specify the location to this file with a system property such as: ```-Djhawtcode.appendCodeFile=/opt/myCode.txt```. The only other additional system property that JHawtCode uses, is a variable to control the system height: ```-Djhawtcode.console.height=500```.
+
+
+With JHawtCode System Properties can be updated dynamically as well. If you want to change, for example, the height of the console, you could simply issue the set property command. The command would be issued on a single line as: ```:sp jhawtcode.console.height 50```.
+
+One additional feature of JHawtCode is the ability to load a jar at runtime into the classpath of the running JVM. We've all probably received the dreaded ClassDefNotFoundError for some random jar, and this aims to be able to fix that while the app is running. The jar must be local, and would be loaded with the command example: ```:rr file:/opt/fixmissing.jar```
 
 
 #### EXAMPLES
@@ -85,13 +135,13 @@ Below are three simple example of usage. They do not indicate the complexity pos
 //Print the Google Analytics Tracking ID from cookie
 jhc.println(getCookie("_ga").getValue());
 :w
-
-
+```
+```
 //Do some simple math
 jhc.println(java.lang.Math.pow(3,3));
 :w
-
-
+```
+```
 //Convert and int to hex
 jhc.println(Integer.toHexString(1234));
 :w
