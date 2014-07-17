@@ -20,7 +20,7 @@ import java.util.jar.JarEntry;
  * PackageDeconstructor retrieves classes from classloader
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 class PackageDeconstructor {

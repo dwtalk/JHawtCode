@@ -13,7 +13,7 @@ import java.util.Set;
  * DynamicClassLoaderJavaFileManager is a java file manager implementation to allow in class loader class compilation
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 public class DynamicClassLoaderJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> implements JavaFileManager {

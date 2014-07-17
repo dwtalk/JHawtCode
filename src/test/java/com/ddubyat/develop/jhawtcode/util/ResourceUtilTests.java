@@ -16,7 +16,7 @@ import java.util.Arrays;
  * ResourceUtil tests
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-16
  */
 @RunWith(SpringJUnit4ClassRunner.class)

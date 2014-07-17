@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * InternalResourceController is a Spring Controller that will serve up css and js for JHawtCode
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 @Controller
@@ -90,7 +90,7 @@ public class DynamicCodeController {
      */
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/dynacode", method = {RequestMethod.POST})
-    public String runCode(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = true, value = "code") String code, @RequestParam(required = false, value = "imports") String imports, @RequestParam(required = false, value = "globals") String globals, @RequestParam(required = false, value = "methods") String methods) throws IOException, ClassNotFoundException {
+    public String runCode(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = true, value = "code", defaultValue = "") String code, @RequestParam(required = false, value = "imports", defaultValue = "") String imports, @RequestParam(required = false, value = "globals", defaultValue = "") String globals, @RequestParam(required = false, value = "methods", defaultValue = "") String methods, @RequestParam(required = false, value = "replacementCP", defaultValue = "") String replacementCP) throws IOException, ClassNotFoundException {
         if(!propertyUtil.canHawtTheCode()) {
             log.debug("Cannot run code since not enabled");
             return (new String(""));
@@ -132,7 +132,22 @@ public class DynamicCodeController {
         }
 
         String compilationError = "";
-        URLClassLoader ucl = (URLClassLoader) Thread.currentThread().getContextClassLoader();
+        URLClassLoader ucl = null;
+
+        if(StringUtil.isNotEmpty(replacementCP)) {
+            ucl = new URLClassLoader(new URL[]{(new File("")).toURI().toURL()});
+
+            String[] filesToLoad = replacementCP.split("!");
+            for (String fileUrl : filesToLoad) {
+                fileUrl = fileUrl.replace("|", "");
+                if (StringUtil.isNotEmpty(fileUrl)) {
+                    ClassLoaderUtil.addUrlToClassPath(new URL(fileUrl), ucl);
+                }
+            }
+        } else {
+            ucl = (URLClassLoader) Thread.currentThread().getContextClassLoader();
+        }
+
         log.debug("Using classloader {}", ucl.toString());
         Class newDynamicClass = null;
 

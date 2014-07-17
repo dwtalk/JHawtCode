@@ -20,7 +20,7 @@ import java.util.zip.GZIPOutputStream;
  * ResourceUtil is used to read and manipulate local resources
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 @Service

@@ -11,7 +11,7 @@ import java.util.Arrays;
  * DynamicCodeInvocationHandler is the invocation handler that will manage proxying executable class
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 public class DynamicCodeInvocationHandler implements InvocationHandler {
@@ -32,7 +32,7 @@ public class DynamicCodeInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object o, Method method, Object[] args) throws Throwable {
         try {
-            log.debug("Invoke called on Object: {} for Method: {} with Args: {}", o.toString(), method.toString(), Arrays.toString(args));
+            //log.debug("Invoke called on Object: {} for Method: {}", o.toString(), method.toString());
             Object dynacode = this.dynaCode.newInstance();
             return method.invoke(dynacode, args);
         } catch (Exception e) {

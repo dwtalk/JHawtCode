@@ -19,14 +19,12 @@ import java.net.URLClassLoader;
  * ClassCompilerUtilTests tests the compile ability of the code with a simple test class in a new class loader
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-16
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration("classpath:test-config.xml")
 @ComponentScan(basePackages = {"com.ddubyat.develop.jhawtcode"})
-@ImportResource("classpath*:jhawtcode-applicationContext.xml")
+@ContextConfiguration("classpath:test-config.xml")
 public class ClassCompilerUtilTests {
 
     @Autowired

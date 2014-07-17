@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * DynamicRuntimeCode is an interface for dynamic invocation
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 public interface DynamicRuntimeCode {

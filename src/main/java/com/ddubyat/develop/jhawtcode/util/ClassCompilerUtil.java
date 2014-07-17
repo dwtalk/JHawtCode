@@ -18,7 +18,7 @@ import java.util.Locale;
  * ClassCompilerUtil compiles a file from string contents then load it into the current classloader using the extended classpath available to the container
  *
  * @author dwtalk
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2014-07-15
  */
 @Service
