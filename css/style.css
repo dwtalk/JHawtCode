@@ -125,6 +125,11 @@
 		color: white;
 	}
 
+	
+	.tright {
+		text-align: right;
+	}
+
 	br.clear
 	{
 		clear: both;
