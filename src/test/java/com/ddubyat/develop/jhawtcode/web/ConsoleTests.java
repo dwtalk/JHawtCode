@@ -50,7 +50,7 @@ public class ConsoleTests {
     @Test
     public void getCSS() throws Exception {
         ResultActions actions = this.mockMvc.perform(get("/jhawtcode/jhc.css").accept(MediaType.TEXT_PLAIN));
-        actions.andDo(print());
+        //actions.andDo(print());
         actions.andExpect(status().isOk());
         actions.andExpect(content().contentType(MediaType.TEXT_PLAIN));
         //not the best content test, but works for now until gzip deflate
@@ -61,7 +61,7 @@ public class ConsoleTests {
     @Test
     public void getJS() throws Exception {
         ResultActions actions = this.mockMvc.perform(get("/jhawtcode/jhc.js").accept(MediaType.ALL));
-        actions.andDo(print());
+        //actions.andDo(print());
         actions.andExpect(status().isOk());
         actions.andExpect(content().contentType(MediaType.APPLICATION_OCTET_STREAM));
         //not the best content test, but works for now until gzip deflate

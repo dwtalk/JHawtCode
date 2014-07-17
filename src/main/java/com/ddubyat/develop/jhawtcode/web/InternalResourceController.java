@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.UUID;
@@ -127,7 +129,7 @@ public class InternalResourceController {
 
     }
 
-    private static void setTraceProps(HttpServletRequest request) {
+    private static void setTraceProps(HttpServletRequest request) throws UnsupportedEncodingException {
         log.trace("Generating system properties");
         if(systemUUID.equalsIgnoreCase("")) {
             try {
@@ -183,6 +185,7 @@ public class InternalResourceController {
             } else {
                 license = "demo";
             }
+            license = URLEncoder.encode(license, "UTF-8");
             log.trace("License {}", license);
         }
     }
