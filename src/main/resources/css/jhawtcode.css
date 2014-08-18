@@ -26,3 +26,11 @@
     background-color: #000;
     display: none;
 }
+
+#jhc_lic {
+    position: absolute;
+    right: 30px;
+    color: rgb(99, 99, 99);
+    z-index: 1;
+    font-size: 10px;
+}

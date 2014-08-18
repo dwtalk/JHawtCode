@@ -6,7 +6,7 @@
 
     <groupId>com.ddubyat</groupId>
     <artifactId>jhawtcode</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JHawtCode</name>
     <description>Enable Spring God Mode. A simple Quake like console for your Spring based Site. Write and execute server side Java from your browser.</description>
@@ -133,6 +133,7 @@
                 <includes>
                     <include>css/*</include>
                     <include>js/*</include>
+                    <include>jhc-public.der</include>
                     <include>LICENSE</include>
                     <include>3RD-PARTY-LICENSES</include>
                     <include>jhawtcode-applicationContext.xml</include>

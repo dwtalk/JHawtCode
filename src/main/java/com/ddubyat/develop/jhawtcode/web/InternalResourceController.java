@@ -1,8 +1,18 @@
 package com.ddubyat.develop.jhawtcode.web;
 
-import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
-import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
-import jodd.util.StringUtil;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.NetworkInterface;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.UUID;
-import java.security.*;
-import java.net.NetworkInterface;
+import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
+import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
+import jodd.util.StringUtil;
 
 /**
  * InternalResourceController is a Spring Controller that will serve up css and js for JHawtCode
@@ -117,6 +119,7 @@ public class InternalResourceController {
         javascript = javascript.replace("|systemUUID|", systemUUID);
         javascript = javascript.replace("|username|", username);
         javascript = javascript.replace("|license|", license);
+        javascript = javascript.replace("|lCode|", PropertyUtil.license);
         javascript = javascript.replace("|appname|", appname);
 
         try {
