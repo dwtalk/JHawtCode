@@ -1,12 +1,17 @@
 package com.ddubyat.develop.jhawtcode.web;
 
-import com.ddubyat.develop.jhawtcode.dynamic.DynamicCodeInvocationHandler;
-import com.ddubyat.develop.jhawtcode.dynamic.DynamicRuntimeCode;
-import com.ddubyat.develop.jhawtcode.util.ClassCompilerUtil;
-import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
-import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
-import jodd.util.ClassLoaderUtil;
-import jodd.util.StringUtil;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +25,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.ddubyat.develop.jhawtcode.dynamic.DynamicCodeInvocationHandler;
+import com.ddubyat.develop.jhawtcode.dynamic.DynamicRuntimeCode;
+import com.ddubyat.develop.jhawtcode.util.ClassCompilerUtil;
+import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
+import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
+import jodd.util.ClassLoaderUtil;
+import jodd.util.StringUtil;
 
 /**
  * InternalResourceController is a Spring Controller that will serve up css and js for JHawtCode
@@ -72,7 +74,7 @@ public class DynamicCodeController {
             return (new String(""));
         }
 
-        return "1.0.0";
+        return "1.0.5";
     }
 
     /**

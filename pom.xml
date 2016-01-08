@@ -6,15 +6,15 @@
 
     <groupId>com.ddubyat</groupId>
     <artifactId>jhawtcode</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
     <name>JHawtCode</name>
     <description>Enable Spring God Mode. A simple Quake like console for your Spring based Site. Write and execute server side Java from your browser.</description>
     <url>http://www.jhawtcode.com</url>
     <licenses>
         <license>
-            <name>Creative Commons - Attribution-NonCommercial 3.0 United States</name>
-            <url>http://creativecommons.org/licenses/by-nc/3.0/us/legalcode</url>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

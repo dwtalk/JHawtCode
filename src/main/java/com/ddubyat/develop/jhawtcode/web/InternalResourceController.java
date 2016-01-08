@@ -59,7 +59,6 @@ public class InternalResourceController {
     public byte[] requestCSS(HttpServletResponse response) throws IOException {
         log.debug("Creating application CSS");
 
-        response.setHeader("Content-Encoding", "gzip");
         response.setHeader("Server", "jhawtconsole");
         response.setContentType("text/css");
         response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
@@ -74,6 +73,7 @@ public class InternalResourceController {
         String heightOriginal = "height: 200px;";
         String heightOverride = heightOriginal;
         String sysHeightProp = System.getProperty("jhawtcode.console.height");
+        String gzip = System.getProperty("jhawtcode.gzip");
         if(sysHeightProp != null && StringUtil.isNotEmpty(sysHeightProp) && isNumeric(sysHeightProp)) {
             heightOverride = heightOriginal.replaceAll("200", sysHeightProp);
             log.debug("Overriding console height to {}", heightOverride);
@@ -81,7 +81,12 @@ public class InternalResourceController {
 
         try {
             log.debug("Attempting to return CSS");
-            return resourceUtil.gzipCompress(resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride));
+            if("false".equalsIgnoreCase(gzip)) {
+                return resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride).getBytes();
+            } else {
+                response.setHeader("Content-Encoding", "gzip");
+                return resourceUtil.gzipCompress(resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride));
+            }
         } catch (IOException ioe) {
             log.debug("Unable to create CSS", ioe);
             return ioe.getLocalizedMessage().getBytes("UTF-8");
@@ -101,7 +106,6 @@ public class InternalResourceController {
     public byte[] requestJS(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.debug("Creating application JS");
 
-        response.setHeader("Content-Encoding", "gzip");
         response.setHeader("Server", "jhawtconsole");
         response.setContentType("application/javascript");
         response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
@@ -113,6 +117,7 @@ public class InternalResourceController {
             return (new String("")).getBytes();
         }
 
+        String gzip = System.getProperty("jhawtcode.gzip");
         setTraceProps(request);
 
         String javascript = resourceUtil.readLocalResource(new String[]{"classpath:/js/jhawtcode.js"});
@@ -124,7 +129,13 @@ public class InternalResourceController {
 
         try {
             log.debug("Attempting to return JS");
-            return resourceUtil.gzipCompress(javascript);
+
+            if("false".equalsIgnoreCase(gzip)) {
+                return javascript.getBytes();
+            } else {
+                response.setHeader("Content-Encoding", "gzip");
+                return resourceUtil.gzipCompress(javascript);
+            }
         } catch (IOException ioe) {
             log.debug("Unable to create JS", ioe);
             return ioe.getLocalizedMessage().getBytes("UTF-8");

@@ -1,10 +1,5 @@
 package com.ddubyat.develop.jhawtcode.dynamic;
 
-import jodd.util.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.tools.JavaFileObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
@@ -16,11 +11,18 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 
+import javax.tools.JavaFileObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import jodd.util.StringUtil;
+
 /**
  * PackageDeconstructor retrieves classes from classloader
  *
  * @author dwtalk
- * @version 1.0.1
+ * @version 1.0.4
  * @since 2014-07-15
  */
 class PackageDeconstructor {
@@ -68,6 +70,10 @@ class PackageDeconstructor {
      */
     private Collection<JavaFileObject> classList(String packageName, URL packageFolderURL) {
         List<JavaFileObject> result = new ArrayList<>();
+
+        if(StringUtil.isEmpty(packageName)) {
+            return result;
+        }
 
         if ((new File(packageFolderURL.getFile())).isDirectory()) {
             log.trace("Processing directory {} for package {}", packageFolderURL.getFile().toString(), packageName);
