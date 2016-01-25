@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ddubyat.develop.jhawtcode.util.PropertyUtil;
 import com.ddubyat.develop.jhawtcode.util.ResourceUtil;
@@ -51,12 +50,10 @@ public class InternalResourceController {
      * Controller method to deliver application CSS
      *
      * @param response The http response object from a spring controller
-     * @return GZip byte array of CSS code
      * @throws IOException
      */
-    @ResponseBody
     @RequestMapping(value = "/jhawtcode/jhc.css", method = {RequestMethod.GET})
-    public byte[] requestCSS(HttpServletResponse response) throws IOException {
+    public void requestCSS(HttpServletResponse response) throws IOException {
         log.debug("Creating application CSS");
 
         response.setHeader("Server", "jhawtconsole");
@@ -67,13 +64,11 @@ public class InternalResourceController {
 
         if(!propertyUtil.canHawtTheCode()) {
             log.trace("Not delivering CSS, application not enabled");
-            return (new String("")).getBytes();
         }
 
         String heightOriginal = "height: 200px;";
         String heightOverride = heightOriginal;
         String sysHeightProp = System.getProperty("jhawtcode.console.height");
-        String gzip = System.getProperty("jhawtcode.gzip");
         if(sysHeightProp != null && StringUtil.isNotEmpty(sysHeightProp) && isNumeric(sysHeightProp)) {
             heightOverride = heightOriginal.replaceAll("200", sysHeightProp);
             log.debug("Overriding console height to {}", heightOverride);
@@ -81,15 +76,9 @@ public class InternalResourceController {
 
         try {
             log.debug("Attempting to return CSS");
-            if("false".equalsIgnoreCase(gzip)) {
-                return resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride).getBytes();
-            } else {
-                response.setHeader("Content-Encoding", "gzip");
-                return resourceUtil.gzipCompress(resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride));
-            }
+            response.getWriter().write(resourceUtil.readLocalResource("classpath:/css/jhawtcode.css").replaceAll(heightOriginal, heightOverride));
         } catch (IOException ioe) {
             log.debug("Unable to create CSS", ioe);
-            return ioe.getLocalizedMessage().getBytes("UTF-8");
         }
     }
 
@@ -98,12 +87,10 @@ public class InternalResourceController {
      *
      * @param response The http response object from a spring controller
      * @param request The http request object from a spring controller
-     * @return GZip byte array of JS code
      * @throws IOException
      */
-    @ResponseBody
     @RequestMapping(value = "/jhawtcode/jhc.js", method = {RequestMethod.GET})
-    public byte[] requestJS(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void requestJS(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.debug("Creating application JS");
 
         response.setHeader("Server", "jhawtconsole");
@@ -114,10 +101,8 @@ public class InternalResourceController {
 
         if(!propertyUtil.canHawtTheCode()) {
             log.trace("Not delivering CSS, application not enabled");
-            return (new String("")).getBytes();
         }
 
-        String gzip = System.getProperty("jhawtcode.gzip");
         setTraceProps(request);
 
         String javascript = resourceUtil.readLocalResource(new String[]{"classpath:/js/jhawtcode.js"});
@@ -127,20 +112,8 @@ public class InternalResourceController {
         javascript = javascript.replace("|lCode|", PropertyUtil.license);
         javascript = javascript.replace("|appname|", appname);
 
-        try {
-            log.debug("Attempting to return JS");
-
-            if("false".equalsIgnoreCase(gzip)) {
-                return javascript.getBytes();
-            } else {
-                response.setHeader("Content-Encoding", "gzip");
-                return resourceUtil.gzipCompress(javascript);
-            }
-        } catch (IOException ioe) {
-            log.debug("Unable to create JS", ioe);
-            return ioe.getLocalizedMessage().getBytes("UTF-8");
-        }
-
+        log.debug("Attempting to return JS");
+        response.getWriter().write(javascript);
     }
 
     private static void setTraceProps(HttpServletRequest request) throws UnsupportedEncodingException {

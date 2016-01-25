@@ -16,8 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-
-import jodd.util.StringUtil;
+import org.springframework.util.StringUtils;
 
 /**
  * PropertyUtil is used to set system properties and check system property for ability to execute dynamic code
@@ -34,7 +33,7 @@ public class PropertyUtil {
     @Autowired
     private ApplicationContext applicationContext;
 
-    public static String license = "OpenSource/NonProfit/Test";
+    public static String license = "Full Function - Unsupported";
     private static Boolean isCanHawt;
 
     /**
@@ -67,10 +66,10 @@ public class PropertyUtil {
 
         String enableProp = System.getProperty("jhawtcode.enabled");
         log.trace("Check for jhawtenabled: {}", enableProp);
-        if(enableProp != null && StringUtil.isNotEmpty(enableProp) && enableProp.equalsIgnoreCase("ICERTIFYTHISISNOTPROD")) {
+        if(enableProp != null && !StringUtils.isEmpty(enableProp) && enableProp.equalsIgnoreCase("ICERTIFYTHISISNOTPROD")) {
             isCanHawt = Boolean.TRUE;
             String licProp = System.getProperty("jhawtcode.license");
-            if(StringUtil.isNotEmpty(licProp)) {
+            if(!StringUtils.isEmpty(licProp)) {
                 try {
                     String email = licProp.split(":")[0];
                     String licenseCode = licProp.split(":")[1];
