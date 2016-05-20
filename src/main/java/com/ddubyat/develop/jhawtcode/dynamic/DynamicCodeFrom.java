@@ -1,16 +1,19 @@
 package com.ddubyat.develop.jhawtcode.dynamic;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+
+import com.ddubyat.develop.jhawtcode.util.LogUtil;
 //JHC-IMPORTS//
 //JHC-FILE-IMPORTS//
 
@@ -53,6 +56,7 @@ public class DynamicCodeFrom implements com.ddubyat.develop.jhawtcode.dynamic.Dy
         //setup the print stream
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintWriter jhc = new PrintWriter(baos);
+        LogUtil logging = new LogUtil(jhc);
 
         try {
 

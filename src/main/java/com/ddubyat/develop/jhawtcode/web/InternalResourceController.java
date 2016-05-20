@@ -50,7 +50,7 @@ public class InternalResourceController {
      * Controller method to deliver application CSS
      *
      * @param response The http response object from a spring controller
-     * @throws IOException
+     * @throws IOException if the css content is inaccessible
      */
     @RequestMapping(value = "/jhawtcode/jhc.css", method = {RequestMethod.GET})
     public void requestCSS(HttpServletResponse response) throws IOException {
@@ -87,7 +87,7 @@ public class InternalResourceController {
      *
      * @param response The http response object from a spring controller
      * @param request The http request object from a spring controller
-     * @throws IOException
+     * @throws IOException if the js file was inaccessible
      */
     @RequestMapping(value = "/jhawtcode/jhc.js", method = {RequestMethod.GET})
     public void requestJS(HttpServletRequest request, HttpServletResponse response) throws IOException {

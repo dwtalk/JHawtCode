@@ -1,12 +1,5 @@
 package com.ddubyat.develop.jhawtcode.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.zip.GZIPOutputStream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 
 /**
  * ResourceUtil is used to read and manipulate local resources
@@ -35,7 +35,7 @@ public class ResourceUtil {
      * Reads local resource files into a string from classpath
      * @param resourcePaths file location
      * @return String of files combined contents
-     * @throws IOException
+     * @throws IOException if unable to read local resource
      */
     public String readLocalResource(String[] resourcePaths) throws IOException {
         log.trace("Reading resource files {}", Arrays.toString(resourcePaths));
@@ -51,7 +51,7 @@ public class ResourceUtil {
      * Reads a local resource file into a string from classpath
      * @param resourcePath file location
      * @return String of file contents
-     * @throws IOException
+     * @throws IOException if unable to read local resource
      */
     public String readLocalResource(String resourcePath) throws IOException {
         log.trace("Reading resource file {}", resourcePath);
@@ -69,7 +69,7 @@ public class ResourceUtil {
      * Compresses string data into a byte array
      * @param uncompressedData string data to be compressed
      * @return byte array of compressed string data
-     * @throws IOException
+     * @throws IOException if unable to compress
      */
     public byte[] gzipCompress(String uncompressedData) throws IOException {
         log.trace("GZip Compressing Resource");

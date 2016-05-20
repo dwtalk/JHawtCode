@@ -24,7 +24,7 @@ Maven Configuration
 <dependency>
 	<groupId>com.ddubyat</groupId>
 	<artifactId>jhawtcode</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.7</version>
 </dependency>
 ```
 
@@ -147,6 +147,17 @@ jhc.println(java.lang.Math.pow(3,3));
 jhc.println(Integer.toHexString(1234));
 :w
 ```
+###### Display all logging information (log4j)
+```
+logging.read();
+:w
+```
+###### Adjust application logging levels (log4j)
+```
+logging.set("org.apache","trace");
+:w
+```
+
 
 #### PROJECT HOME
 

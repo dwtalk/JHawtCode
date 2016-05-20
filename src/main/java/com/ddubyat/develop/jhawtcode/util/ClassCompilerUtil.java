@@ -1,18 +1,26 @@
 package com.ddubyat.develop.jhawtcode.util;
 
-import com.ddubyat.develop.jhawtcode.dynamic.DynamicClassLoaderJavaFileManager;
-import com.ddubyat.develop.jhawtcode.dynamic.InMemoryJavaFileObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import jodd.util.ClassLoaderUtil;
-
-import javax.tools.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import javax.tools.Diagnostic;
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.ddubyat.develop.jhawtcode.dynamic.DynamicClassLoaderJavaFileManager;
+import com.ddubyat.develop.jhawtcode.dynamic.InMemoryJavaFileObject;
+import jodd.util.ClassLoaderUtil;
 
 /**
  * ClassCompilerUtil compiles a file from string contents then load it into the current classloader using the extended classpath available to the container
@@ -34,7 +42,7 @@ public class ClassCompilerUtil {
      * @param source the string source code of the class
      * @param loader the web application url class loader
      * @return A compiled class or null
-     * @throws Exception
+     * @throws Exception variety of exceptions when compiling code
      */
     public Class compileNewClass(String fileName, String classPath, String source, ClassLoader loader) throws Exception {
         log.debug("Compiling class {} for classpath {}", fileName, classPath);

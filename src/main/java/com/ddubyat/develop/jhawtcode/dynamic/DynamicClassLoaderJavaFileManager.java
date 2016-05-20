@@ -1,13 +1,19 @@
 package com.ddubyat.develop.jhawtcode.dynamic;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.tools.*;
 import java.io.IOException;
 import java.net.URLClassLoader;
 import java.util.Collections;
 import java.util.Set;
+
+import javax.tools.FileObject;
+import javax.tools.ForwardingJavaFileManager;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * DynamicClassLoaderJavaFileManager is a java file manager implementation to allow in class loader class compilation
@@ -27,8 +33,8 @@ public class DynamicClassLoaderJavaFileManager extends ForwardingJavaFileManager
     /**
      * Constructor for file manager using classloader
      *
-     * @param classLoader
-     * @param standardFileManager
+     * @param classLoader the application classloader
+     * @param standardFileManager the in mem file manager
      */
     public DynamicClassLoaderJavaFileManager(ClassLoader classLoader, StandardJavaFileManager standardFileManager) {
         super(standardFileManager);

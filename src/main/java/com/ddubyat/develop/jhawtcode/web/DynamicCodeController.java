@@ -74,7 +74,7 @@ public class DynamicCodeController {
             return (new String(""));
         }
 
-        return "1.0.5";
+        return "1.0.7-SNAPSHOT";
     }
 
     /**
@@ -86,9 +86,10 @@ public class DynamicCodeController {
      * @param imports Java imports to add to code
      * @param globals Java global variables to add to code
      * @param methods Java methods to add to code
+     * @param replacementCP Jave replacement classpath
      * @return Output from code jhc printstream or messaging
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException if there were problems running code
+     * @throws ClassNotFoundException if there were problems running code
      */
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/dynacode", method = {RequestMethod.POST})
@@ -205,7 +206,7 @@ public class DynamicCodeController {
      *
      * @param url Url of the jar file to be loaded
      * @return exception message or success message
-     * @throws MalformedURLException
+     * @throws MalformedURLException if we are unable to load the jar
      */
     @ResponseBody
     @RequestMapping(value = "/jhawtcode/dynajar", method = {RequestMethod.POST})

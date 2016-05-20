@@ -31,7 +31,7 @@ jQuery(document).ready(function($) {
 
     var $jhcDiv = $('<div id="jhc_parent"><span id="jhc_lic">Licensed For: |lCode|</span><textarea id="jhc" wrap="hard" rows="5">JHawtCode' +
         '</textarea></div>' +
-        '<img src=\"http://www.google-analytics.com/collect?v=1&amp;tid=UA-52728333-1&amp;cid=|systemUUID|&amp;uid=|username|&amp;t=event&amp;ec=console&amp;ea=open&amp;cs=|appname|&amp;ck=|license|&amp;cn=usage&amp;an=jhawtcode&amp;av=1.0.0\" />' +
+        '<img src=\"//www.google-analytics.com/collect?v=1&amp;tid=UA-52728333-1&amp;cid=|systemUUID|&amp;uid=|username|&amp;t=event&amp;ec=console&amp;ea=open&amp;cs=|appname|&amp;ck=|license|&amp;cn=usage&amp;an=jhawtcode&amp;av=1.0.0\" style=\"display:none;\" />' +
         '');
 
     $('body').prepend($jhcDiv)
@@ -45,6 +45,7 @@ jQuery(document).ready(function($) {
     var globalMethodLineOrVarMatch = /^(public|private|protected|package)\s(.+;)/;
     var functionBeginMatch = /^(public|private|protected|package)\s(.+[(].*[)].*[^;])/;
     var clearOnInput = true;
+    var removeRetrun = false;
 
     $(function() {
         $(window).keypress(function(e) {
@@ -84,11 +85,19 @@ jQuery(document).ready(function($) {
             clearOnInput = false;
         }
 
+        if(removeRetrun) {
+            var inp = $(self).val();
+            inp = inp.replace(new RegExp('(\r\n|\n|\r)' + '$'), '');
+            $(self).val(inp);
+            removeRetrun = false;
+        }
+
         if (e.which === 13 && !e.shiftKey) {
             //e.preventDefault();
             var text = $(self).val();
             var textarray = text.split('\n');
             var lastCMD = textarray[textarray.length - 1];
+            console.log(lastCMD);
 
             if(lastCMD == ":w") {
                 var code = text.slice(0,-3);
@@ -161,11 +170,16 @@ jQuery(document).ready(function($) {
                         console.log(errorThrown);
                     }
                 })
-                clearOnInput = true;
+                clearOnInput = false;
+                removeRetrun = true;
             } else if (lastCMD == ":q") {
                 $(self).val('');
                 e.preventDefault();
                 parent.slideToggle();
+            } else if (lastCMD == ":k") {
+                $(self).val('');
+                clearOnInput = true;
+                removeRetrun = true;
             } else if (jarmatch.test(lastCMD)) {
                 $(self).val('');
                 var cmdMatch = jarmatch.exec(lastCMD);
