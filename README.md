@@ -116,6 +116,8 @@ HttpSession getSession();
 Cookie getCookie(String cookieName);
 ```
 
+To clear the screen, simply enter the command ```:k``` and press enter for the screen to refresh
+
 ##### Options
 
 JHawtCode is not limited to these helper objects, and your own code can be used to supplement this. To enable this, simply create a local file with imports, global variables, and methods. Then you will need to specify the location to this file with a system property such as: ```-Djhawtcode.appendCodeFile=/opt/myCode.txt```. The only other additional system property that JHawtCode uses, is a variable to control the system height: ```-Djhawtcode.console.height=500```.
