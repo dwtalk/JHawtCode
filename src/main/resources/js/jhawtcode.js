@@ -47,6 +47,16 @@ jQuery(document).ready(function($) {
     var clearOnInput = true;
     var removeRetrun = false;
 
+    var basePath = "";
+    var styles = $("link[rel='stylesheet']");
+    styles.each(function(){
+        var curr = $(this);
+        if(curr.attr("href").indexOf("jhawtcode") > -1) {
+            var path = curr.attr("href").substring(0, curr.attr("href").indexOf("jhawtcode")-1);
+            basePath = path;
+        }
+    });
+
     $(function() {
         $(window).keypress(function(e) {
             if(e.which == 96) {
@@ -155,7 +165,7 @@ jQuery(document).ready(function($) {
                 methods = textarray.join("\n");
 
                 $.ajax({
-                    url: "/jhawtcode/dynacode",
+                    url: basePath + "/jhawtcode/dynacode",
                     type: "POST",
                     data: {"code" : nonFunctions, "imports" : imports, "globals" : globals, "methods" : methods},
                     cache: false,
@@ -185,7 +195,7 @@ jQuery(document).ready(function($) {
                 var cmdMatch = jarmatch.exec(lastCMD);
 
                 $.ajax({
-                    url: "/jhawtcode/dynajar",
+                    url: basePath + "/jhawtcode/dynajar",
                     type: "POST",
                     data: {"url" : ""+cmdMatch[2]+""},
                     cache: false,
@@ -206,7 +216,7 @@ jQuery(document).ready(function($) {
                 var cmdMatch = propmatch.exec(lastCMD);
 
                 $.ajax({
-                    url: "/jhawtcode/dynaprop",
+                    url: basePath + "/jhawtcode/dynaprop",
                     type: "POST",
                     data: {"propkey" : ""+cmdMatch[2]+"", "value" : ""+cmdMatch[3]+""},
                     cache: false,
